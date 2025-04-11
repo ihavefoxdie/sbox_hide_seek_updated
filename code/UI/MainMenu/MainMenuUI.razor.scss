@@ -1,0 +1,33 @@
+@import "../Styles/base.scss";
+
+MainMenuUI {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	//background-color: #444;
+	justify-content: space-around;
+	align-items: center;
+	//border-radius: 20px;
+
+	.menu_window {
+		height: 80%;
+		width: 50%;
+	}
+
+	.menu_items {
+		transition: all 0.1s linear;
+		pointer-events: all;
+		margin: 5vh;
+		flex-direction: column;
+		justify-content: space-evenly;
+		height: 100%;
+	}
+
+	.button_container {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+	}
+}

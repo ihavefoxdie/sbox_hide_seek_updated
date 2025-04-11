@@ -1,0 +1,64 @@
+@import "Styles/base.scss";
+
+
+HostMenu {
+    //background-color: #444;
+    justify-content: space-around;
+    align-items: center;
+    transition: all 0.1s linear;
+
+    .header {
+        height: 8%;
+        padding: 1vh;
+        justify-content: space-between;
+
+        .search {
+            margin-right: 1vw;
+
+            .hs_window_input_button {
+                min-width: 4vw;
+                //aspect-ratio: 2/1;
+            }
+
+            .hs_search_entry {
+                width: 10vw;
+                //aspect-ratio: 2/1;
+            }
+        }
+
+        .start {
+            .hs_window_input_button {
+                background-color: #ff6a00;
+            }
+        }
+    }
+
+    .maps {
+        height: 100%;
+        overflow-y: scroll;
+        flex-wrap: wrap;
+        margin: 1vh;
+        gap: 1vh;
+        justify-content: space-between;
+        transition: all 0.1s linear;
+    }
+
+    .map_element {
+        flex-direction: column;
+        //border-radius: 0.4vh;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 225px;
+        height: 14vh;
+        aspect-ratio: 1;
+        font-family: Poppins;
+        font-size: 2vh;
+        transition: all 0.3s ease-out;
+        //border-width: 0vh;
+
+
+        &:hover {
+            background-size: 200px;
+        }
+    }
+}

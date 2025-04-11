@@ -1,0 +1,36 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System.Threading.Tasks;
+
+@inherits PanelComponent
+@namespace HideAndSeek.UI
+
+<root style="opacity: @Opacity">
+</root>
+
+@code
+{
+    [Range (0, 1)]
+    [Property] public int Opacity { get; set; } = 1;
+    private bool _changed = false;
+    private TimeSince timeSinceStart;
+
+    protected override void OnAwake()
+    {
+        timeSinceStart = 0;
+    }
+
+    protected override void OnUpdate()
+    {
+        if(timeSinceStart > 0.5 && !_changed)
+        {
+            _changed = true;
+            Opacity = 0;
+        }
+    }
+
+	/// <summary>
+    /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+    /// </summary>
+    protected override int BuildHash() => System.HashCode.Combine(Opacity);
+}

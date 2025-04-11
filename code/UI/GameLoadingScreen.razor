@@ -1,0 +1,71 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System.Text
+@using System.Threading.Tasks;
+
+@inherits PanelComponent
+@namespace HideAndSeek.UI
+
+<root>
+    <div class="LoadingScreen">
+        <div style="flex-direction: column;">
+            <a class="LSText" style="font-weight: bold;">@LoadingText</a>
+            <div style="height: 10vh;">
+                <a class="LSText" style="font-size: 2vh;">Package: @LoadingElement</a>
+            </div>
+        </div>
+        <div class="map-info" style="@(GetMapThumb())">
+        </div>
+    </div>
+</root>
+
+@code
+{
+    private Package MapPackage;
+    public string LoadingElement { get; set; }
+    private string LoadingText { get; set; } = "Loading...";
+    Task loadAnim;
+    //[Property, TextArea] public string MyStringValue { get; set; } = "Hello World!";
+
+    private async Task LoadingChangeAnim()
+    {
+        StringBuilder stringBuilder = new(LoadingText);
+        if (LoadingText.Contains("..."))
+        {
+            stringBuilder.Replace("...", "");
+            LoadingText = stringBuilder.ToString();
+        }
+        else
+        {
+            stringBuilder.Append(".");
+            LoadingText = stringBuilder.ToString();
+        }
+        await Task.Delay(500);
+    }
+
+    private string GetMapThumb()
+    {
+        if (MapPackage != null)
+            return "background-image: url(" + MapPackage.Thumb + ")";
+
+        return "background-color: white";
+    }
+
+    protected override void OnStart()
+    {
+        MapPackage = Package.FetchAsync(LoadingElement, true).Result;
+    }
+
+    protected override void OnFixedUpdate()
+    {
+        if(loadAnim is null || loadAnim.IsCompletedSuccessfully)
+        {
+            loadAnim = LoadingChangeAnim();
+        }
+        base.OnUpdate();
+    }
+    /// <summary>
+    /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+    /// </summary>
+    protected override int BuildHash() => System.HashCode.Combine(LoadingElement, LoadingText);
+}

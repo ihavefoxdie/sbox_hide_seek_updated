@@ -1,0 +1,98 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using HideAndSeek.GameLoop;
+@using HideAndSeek.GameLoop.Rules;
+@using HideAndSeek.UI;
+
+@inherits PanelComponent
+
+@namespace HideAndSeek.UI.MainMenu
+
+<root>
+    @if (HostPressed)
+    {
+        <div class="menu_window">
+            <HostMenu Play="@Play" @ref="MapSelection" style="opacity: @MenuOpacity;"/>
+        </div>
+    }
+    @if (ServerBrowserPressed)
+    {
+        <div class="menu_window">
+            <ServerBrowser style="opacity: @MenuOpacity;"></ServerBrowser>
+        </div>
+    }
+    <div class="menu_items" style="opacity: @ControlsOpacity;">
+        <GameTitle class="main_title" Text="Hide&Seek"></GameTitle>
+        <div class="button_container">
+            <button class="hs_button" onclick=@(() => OpenMenu("host"))>Host</button>
+            <button class="hs_button" onclick=@(() => OpenMenu("serverBrowser"))>Server Browser</button>
+            <button class="hs_button">Settings</button>
+            <button class="hs_button" onclick=@Testing>Testing Button</button>
+            <button class="hs_button" onclick=@Exit>Quit</button>
+        </div>
+    </div>
+
+</root>
+
+@code
+{
+    private bool HostPressed = false;
+    private bool ServerBrowserPressed = false;
+    private double MenuOpacity = 1;
+    private double ControlsOpacity = 1;
+    private HostMenu MapSelection { get; set; }
+    public string MyStringValue { get; set; } = "Hide&Seek";
+    private string SelectedMap
+    {
+        get
+        {
+            return MapSelection?.SelectedMap ?? "facepunch.flatgrass";
+        }
+    }
+    private Panel PrevButton;
+
+    private async void Play()
+    {
+        UserGameSettings gameSettings = new();
+        gameSettings.MapName = SelectedMap;
+        Log.Info(gameSettings.MapName);
+        gameSettings.SaveSettings();
+        await LevelLoader.ChangeScene("scenes/LoadingScreen.scene", false, Game.ActiveScene);
+    }
+
+    private async void OpenMenu(string button)
+    {
+        MenuOpacity = 0;
+        await Task.Delay(100);
+        switch(button)
+        {
+            case "host":
+                HostPressed = !HostPressed;
+                ServerBrowserPressed = false;
+                break;
+            case "serverBrowser":
+                ServerBrowserPressed = !ServerBrowserPressed;
+                HostPressed = false;
+                break;
+        }
+        await Task.Delay(1);
+        MenuOpacity = 1;
+    }
+    
+    
+
+    private void Exit()
+    {
+        Game.Close();
+    }
+
+    private void Testing()
+    {
+        Log.Info(SelectedMap);
+    }
+
+    /// <summary>
+    /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+    /// </summary>
+    protected override int BuildHash() => System.HashCode.Combine(MenuOpacity, HostPressed, ControlsOpacity);
+}

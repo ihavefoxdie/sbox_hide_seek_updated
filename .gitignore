@@ -11,17 +11,20 @@ bin
 Properties/*
 code/obj/*
 code/Properties/*
+code/.vs/*
+
+# Exported / standalone games
+Exports/*
 
 # Auto-generated asset related files
+.sbox/*
 *.generated.*
 *.*_c
 !*.shader_c
 *.los
-*.vpk
+
 *launchSettings.json
 *.sln
 
 *idea
 
-# Exported / standalone games
-Exports/

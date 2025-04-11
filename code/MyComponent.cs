@@ -1,9 +1,12 @@
 
-public sealed class MyComponent : Component
-{
-	[Property] public string StringProperty { get; set; }
 
-	protected override void OnUpdate()
-	{
-	}
+using System;
+using System.Threading.Tasks;
+
+namespace HideAndSeek;
+
+public sealed class MyComponent
+{
+	public Func<Task> BeforeChange { get; set; }
+
 }

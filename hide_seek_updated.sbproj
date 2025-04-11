@@ -1,5 +1,5 @@
 {
-  "Title": "hide\u0026seek updated",
+  "Title": "hide&seek updated",
   "Type": "game",
   "Org": "purpeliz",
   "Ident": "hide_seek_updated",
@@ -8,7 +8,8 @@
   "Resources": null,
   "PackageReferences": [],
   "EditorReferences": null,
-  "IsWhitelistDisabled": false,
+  "Mounts": null,
+  "IsStandaloneOnly": false,
   "Metadata": {
     "MaxPlayers": 64,
     "MinPlayers": 1,
@@ -22,6 +23,22 @@
     "PerMapRanking": false,
     "LeaderboardType": "None",
     "CsProjName": "",
-    "StartupScene": "scenes/minimal.scene"
+    "StartupScene": "scenes/mainmenu.scene",
+    "LaunchMode": "Normal",
+    "Compiler": {
+      "RootNamespace": "Sandbox",
+      "DefineConstants": "SANDBOX;ADDON;DEBUG",
+      "NoWarn": "1701;1702;1591;",
+      "WarningsAsErrors": "",
+      "TreatWarningsAsErrors": false,
+      "Nullables": false,
+      "ReleaseMode": "Debug",
+      "AssemblyReferences": [],
+      "IgnoreFolders": [
+        "editor",
+        "unittest"
+      ],
+      "DistinctAssemblyReferences": []
+    }
   }
 }

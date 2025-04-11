@@ -1,0 +1,656 @@
+{
+  "__guid": "c5b6585f-a34a-4777-88ba-137f1976ce3e",
+  "GameObjects": [
+    {
+      "__guid": "f6c02e33-c571-4b68-bb3e-dcb62f696731",
+      "Flags": 0,
+      "Name": "Scene",
+      "Position": "149.3263,149.3264,-211.1794",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SceneInformation",
+          "__guid": "8f624ff3-541b-4e99-aa60-80ff9ae6b777",
+          "Author": null,
+          "Changes": "",
+          "Description": "",
+          "Group": "Menus",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "SceneTags": "mainmenu",
+          "Title": "Main Menu",
+          "Version": null
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "2a060737-55df-405c-90b2-d56646709091",
+          "Flags": 0,
+          "Name": "Plane",
+          "Scale": "5,5,1",
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "3ca533a2-0a65-45e2-a938-7138e45a0b1a",
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/wood/floor/wooden_flooring_b2.vmat",
+              "Model": "models/dev/plane.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.PlaneCollider",
+              "__guid": "35f8703a-2830-428d-9129-d8c803f300cd",
+              "Center": "0,0,0",
+              "Friction": null,
+              "IsTrigger": false,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "Scale": "100,100",
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ]
+        },
+        {
+          "__guid": "d4127cb2-3f02-424c-8b8a-252d27da039b",
+          "Flags": 0,
+          "Name": "Couch",
+          "Position": "7.016998,-0.00004577637,73.21111",
+          "Rotation": "0.2852656,-0.4157918,0.6723965,0.5418705",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.Rigidbody",
+              "__guid": "43ab0d96-66fd-4c2f-a3e5-da6d29491ca9",
+              "AngularDamping": 0,
+              "Gravity": true,
+              "LinearDamping": 5,
+              "Locking": {
+                "X": false,
+                "Y": false,
+                "Z": false,
+                "Pitch": false,
+                "Yaw": false,
+                "Roll": false
+              },
+              "MassCenterOverride": "0,0,0",
+              "MassOverride": 0,
+              "MotionEnabled": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OverrideMassCenter": false,
+              "RigidbodyFlags": 0,
+              "StartAsleep": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "a6c004ec-7047-4802-9c6a-d0ccdf055a7d",
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/props/couch/couch.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "bf8604dc-c279-4af9-9a02-edb331191165",
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "models/props/couch/couch.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "Static": false,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ]
+        },
+        {
+          "__guid": "e824ec68-a4ec-4c7a-852b-c99279b50c91",
+          "Flags": 0,
+          "Name": "watermelon",
+          "Position": "0,0,667.061",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.Prop",
+              "__guid": "cd6a45e3-85db-4dc6-8a3c-4dc8a8c37822",
+              "BodyGroups": 18446744073709551615,
+              "Health": 2,
+              "IsStatic": false,
+              "MaterialGroup": null,
+              "Model": "models/sbox_props/watermelon/watermelon.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnPropBreak": {
+                "__version": 9,
+                "__guid": "0c6aaa2c-319c-45ab-ace8-9964c0a0d22e",
+                "__changeId": 30,
+                "UserData": {
+                  "Title": "On Prop Break"
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "input"
+                  },
+                  {
+                    "Id": 3,
+                    "Type": "resource.ref",
+                    "Properties": {
+                      "T": "Sandbox.SoundEvent",
+                      "value": "sounds/impacts/melee/impact-melee-flesh.sound"
+                    },
+                    "UserData": {
+                      "Position": "96,96"
+                    }
+                  },
+                  {
+                    "Id": 4,
+                    "Type": "sound.play",
+                    "UserData": {
+                      "Position": "312,48"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 4,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_target",
+                    "DstId": 4,
+                    "DstName": "_this"
+                  },
+                  {
+                    "SrcId": 3,
+                    "SrcName": "_result",
+                    "DstId": 4,
+                    "DstName": "soundEvent"
+                  }
+                ]
+              },
+              "OnPropTakeDamage": null,
+              "StartAsleep": false,
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "HideAndSeek.MainMenu.Melon",
+              "__guid": "b1e452b1-6ca9-4720-a2f1-736e0477df7e",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "PropComponent": {
+                "_type": "component",
+                "component_id": "cd6a45e3-85db-4dc6-8a3c-4dc8a8c37822",
+                "go": "e824ec68-a4ec-4c7a-852b-c99279b50c91",
+                "component_type": "Prop"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "a71959be-af94-4180-86cd-f78b2791e481",
+          "Flags": 0,
+          "Name": "Lighting",
+          "Enabled": true,
+          "Children": [
+            {
+              "__guid": "b9616fb0-0c78-4a7e-81b7-0688e041be7a",
+              "Flags": 0,
+              "Name": "Sun",
+              "Position": "-264.7259,313.1663,417.2404",
+              "Rotation": "-0.09904574,0.3696438,-0.2391176,0.8923992",
+              "Tags": "light_directional,light",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.DirectionalLight",
+                  "__guid": "a3aa7895-7abe-4509-8c97-d34ee375ee19",
+                  "FogMode": "Enabled",
+                  "FogStrength": 1,
+                  "LightColor": "0.91373,0.98039,1,1",
+                  "OnComponentDestroy": null,
+                  "OnComponentDisabled": null,
+                  "OnComponentEnabled": null,
+                  "OnComponentFixedUpdate": null,
+                  "OnComponentStart": null,
+                  "OnComponentUpdate": null,
+                  "Shadows": true,
+                  "SkyColor": "0,0,0,0"
+                }
+              ]
+            },
+            {
+              "__guid": "ebc68b61-1447-4318-a508-15371882c85d",
+              "Flags": 0,
+              "Name": "2D Skybox",
+              "Tags": "skybox",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SkyBox2D",
+                  "__guid": "395bb180-6879-463b-8f51-22d626ba2fa3",
+                  "OnComponentDestroy": null,
+                  "OnComponentDisabled": null,
+                  "OnComponentEnabled": null,
+                  "OnComponentFixedUpdate": null,
+                  "OnComponentStart": null,
+                  "OnComponentUpdate": null,
+                  "SkyIndirectLighting": true,
+                  "SkyMaterial": "materials/skybox/skybox_overcast_02.vmat",
+                  "Tint": "1,1,1,1"
+                }
+              ]
+            },
+            {
+              "__guid": "86b899b9-d438-434b-b57d-7a0897f902fa",
+              "Flags": 0,
+              "Name": "Spot Light",
+              "Position": "-145.0066,0.00001525879,113.7745",
+              "Rotation": "0,0.3826834,0,0.9238796",
+              "Tags": "light_spot,light",
+              "Components": [
+                {
+                  "__type": "Sandbox.SpotLight",
+                  "__guid": "9adda189-e7df-467f-97ca-5372e7f65c81",
+                  "Attenuation": 1,
+                  "ConeInner": 15,
+                  "ConeOuter": 45,
+                  "Cookie": null,
+                  "FogMode": "Enabled",
+                  "FogStrength": 1,
+                  "LightColor": "0.91373,0.98039,1,1",
+                  "OnComponentDestroy": null,
+                  "OnComponentDisabled": null,
+                  "OnComponentEnabled": null,
+                  "OnComponentFixedUpdate": null,
+                  "OnComponentStart": null,
+                  "OnComponentUpdate": null,
+                  "Radius": 500,
+                  "Shadows": true
+                }
+              ]
+            },
+            {
+              "__guid": "ceda0c0c-1202-4ee9-b7cb-2afe89327750",
+              "Flags": 0,
+              "Name": "Envmap Probe",
+              "Position": "0,7.170151,100.4389",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.EnvmapProbe",
+                  "__guid": "4eded303-01f1-4d87-8526-7f29975ce7a5",
+                  "Bounds": {
+                    "Mins": "-100,-100,-100",
+                    "Maxs": "100,100,100"
+                  },
+                  "DelayBetweenUpdates": 10,
+                  "Feathering": 32,
+                  "FrameInterval": 0,
+                  "MaxDistance": 512,
+                  "MultiBounce": true,
+                  "OnComponentDestroy": null,
+                  "OnComponentDisabled": null,
+                  "OnComponentEnabled": null,
+                  "OnComponentFixedUpdate": null,
+                  "OnComponentStart": null,
+                  "OnComponentUpdate": null,
+                  "Projection": "Box",
+                  "RenderDynamically": true,
+                  "Resolution": "Small",
+                  "Texture": "textures/cubemaps/default2.vtex",
+                  "TintColor": "1,1,1,1",
+                  "UpdateStrategy": "TimeInterval",
+                  "ZFar": 4096,
+                  "ZNear": 16
+                }
+              ]
+            },
+            {
+              "__guid": "837065f3-43a7-4b12-8d3a-b94a4b3d40c3",
+              "Flags": 0,
+              "Name": "Point Light",
+              "Position": "0,0,61.19336",
+              "Tags": "light_point,light",
+              "Components": [
+                {
+                  "__type": "Sandbox.PointLight",
+                  "__guid": "b6cb543f-d94e-4256-bc42-61328f851729",
+                  "Attenuation": 0.78,
+                  "FogMode": "Enabled",
+                  "FogStrength": 1,
+                  "LightColor": "0.91373,0.98039,1,1",
+                  "OnComponentDestroy": null,
+                  "OnComponentDisabled": null,
+                  "OnComponentEnabled": null,
+                  "OnComponentFixedUpdate": null,
+                  "OnComponentStart": null,
+                  "OnComponentUpdate": null,
+                  "Radius": 400,
+                  "Shadows": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__guid": "064ad858-d2b0-4891-912e-0b0bacc1b5c5",
+          "Flags": 0,
+          "Name": "Box",
+          "Position": "-123.0198,0.6735992,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.MeshComponent",
+              "__guid": "87e3a47d-c4a1-425f-8c6c-74cc8d0d3d7c",
+              "Collision": "Mesh",
+              "Color": "1,1,1,1",
+              "Friction": null,
+              "HideInGame": false,
+              "IsTrigger": false,
+              "Mesh": {
+                "Topology": "H4sIAAAAAAAACk2MCQoAIQzE4qqr//9wJdiCA6WQOQawgcbVBwzgT+bJXi0gIkLeM68q69fXm7n1bsv1a6skN2tH394B6DpJeKAAAAA=",
+                "Position": "26.3065,150,-211.1794",
+                "Rotation": "0,0,0,1",
+                "Positions": [
+                  "-246.5952,-248.4074,0",
+                  "246.5952,-248.4074,0",
+                  "246.5952,248.4074,0",
+                  "-246.5952,248.4074,0"
+                ],
+                "TextureCoord": [
+                  "13.22173,2.709491",
+                  "0,0",
+                  "13.22173,-5.053241",
+                  "0,0",
+                  "-2.190475,-5.053241",
+                  "0,0",
+                  "-2.190475,2.709491",
+                  "0,0"
+                ],
+                "TextureUAxis": [
+                  "1,0,0"
+                ],
+                "TextureVAxis": [
+                  "0,-1,0"
+                ],
+                "TextureScale": [
+                  "0.06249998,0.125"
+                ],
+                "TextureOffset": [
+                  "355.0972,88.00024"
+                ],
+                "MaterialIndex": [
+                  6
+                ],
+                "EdgeFlags": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "Materials": [
+                  "materials/dev/reflectivity_30.vmat",
+                  "materials/trimsheets/wood/wood_trim_03.vmat",
+                  "materials/wood/floor/wooden_flooring_b.vmat",
+                  "materials/wood/floor/wooden_flooring_b_blend.vmat",
+                  "materials/wood/floor/wooden_flooring_a.vmat",
+                  "materials/wood/floor/wooden_flooring_a_blend.vmat",
+                  "materials/wood/floor/wooden_flooring_b2.vmat"
+                ]
+              },
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RenderType": "On",
+              "SmoothingAngle": 40,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "__guid": "e331edc2-79f7-4784-b4eb-0eb1f6c85fd4",
+      "Flags": 0,
+      "Name": "Camera",
+      "Position": "-28.7151,136.0947,-180.4736",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "9613d44f-968e-4a2c-99f9-c3f45fced672",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "FovAxis": "Horizontal",
+          "IsMainCamera": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        },
+        {
+          "__type": "Sandbox.Bloom",
+          "__guid": "d2c8f8e5-c98e-4e2c-8671-3e550b132574",
+          "__version": 1,
+          "Gamma": 2.2,
+          "Mode": "Screen",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Strength": 0.5,
+          "Threshold": 1,
+          "Tint": "1,0.94791,0.86977,1"
+        },
+        {
+          "__type": "Sandbox.AmbientOcclusion",
+          "__guid": "a5a1293c-2aaf-4a33-93e7-9af626549122",
+          "__version": 1,
+          "DenoiseMode": "Temporal",
+          "FalloffRange": 0.7,
+          "Intensity": 0.25,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Quality": "High",
+          "Radius": 128,
+          "ThinCompensation": 0
+        },
+        {
+          "__type": "HideAndSeek.MainMenu.CameraTest",
+          "__guid": "0beefe24-a2b1-4cc3-8f9c-afea7d4ea71d",
+          "ObjectToFollow": {
+            "_type": "gameobject",
+            "go": "e824ec68-a4ec-4c7a-852b-c99279b50c91"
+          },
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        }
+      ]
+    },
+    {
+      "__guid": "b43dcc4a-7d48-44df-82b4-877f6673ef97",
+      "Flags": 0,
+      "Name": "UI",
+      "Position": "-100.718,127.2228,-65.8739",
+      "Enabled": true,
+      "Children": [
+        {
+          "__guid": "5f4d351c-49cf-4825-97c9-4b8dd3004f55",
+          "Flags": 0,
+          "Name": "MainMenuUI",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "5ae65178-6db0-48d6-9e7a-0ed65205cc29",
+              "AutoScreenScale": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "Opacity": 1,
+              "Scale": 1,
+              "ScaleStrategy": "ConsistentHeight",
+              "TargetCamera": null,
+              "ZIndex": 100
+            },
+            {
+              "__type": "HideAndSeek.UI.MainMenu.MainMenuUI",
+              "__guid": "1e3d8215-2f8f-4c8f-9368-e13382f56ab4",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
+    "PhysicsSubSteps": 1,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "Metadata": {
+      "Title": "Main Menu",
+      "Group": "Menus",
+      "Tags": "mainmenu"
+    },
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "ResourceVersion": 2,
+  "Title": "Main Menu",
+  "Description": null,
+  "__references": [
+    "facepunch.couch#33708",
+    "facepunch.watermelon#90057",
+    "facepunch.wood_trim_03#43511",
+    "facepunch.woodenflooringblight#90271"
+  ],
+  "__version": 2
+}
