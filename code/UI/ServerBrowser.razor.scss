@@ -5,4 +5,62 @@ ServerBrowser {
 	justify-content: space-around;
 	align-items: center;
 	transition: all 0.1s linear;
+
+	.header {
+		justify-content: space-between;
+
+		.search {
+			//margin-right: 1vw;
+
+			.hs_window_input_button {
+				aspect-ratio: 1;
+				//aspect-ratio: 2/1;
+			}
+
+			.hs_search_entry {
+				width: 10vw;
+				//aspect-ratio: 2/1;
+			}
+		}
+	}
+
+	.servers {
+		height: 100%;
+		flex-direction: column;
+		margin: 1vh;
+		gap: 1vh;
+		justify-content: space-between;
+		transition: all 0.1s linear;
+
+		.servers_header {
+			padding: 0 2vh 0 2vh;
+			flex-direction: row;
+			font-color: white;
+			justify-content: space-between;
+		}
+
+		.server_list_background {
+			background-color: #1717176d;
+			height: 100%;
+			padding: 2vh;
+		}
+
+		.server_list {
+			flex-wrap: wrap;
+			height: 100%;
+			overflow-y: scroll;
+		}
+
+		.hs_button {
+			height: 4vh;
+			justify-content: space-between;
+			font-size: 2vh;
+			width: 100%;
+
+			&:hover {
+				font-style: italic;
+				font-size: 2.2vh;
+			}
+		}
+	}
 }

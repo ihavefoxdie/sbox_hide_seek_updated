@@ -8,10 +8,6 @@ HostMenu {
     transition: all 0.1s linear;
 
     .header {
-        height: 8%;
-        padding: 1vh;
-        justify-content: space-between;
-
         .search {
             margin-right: 1vw;
 
@@ -33,14 +29,20 @@ HostMenu {
         }
     }
 
-    .maps {
+    .maps_background {
         height: 100%;
-        overflow-y: scroll;
-        flex-wrap: wrap;
         margin: 1vh;
-        gap: 1vh;
-        justify-content: space-between;
-        transition: all 0.1s linear;
+        padding: 2vh;
+        background-color: #1717176d;
+
+        .maps {
+            height: 100%;
+            overflow-y: scroll;
+            flex-wrap: wrap;
+            gap: 1vh;
+            justify-content: space-between;
+            transition: all 0.1s linear;
+        }
     }
 
     .map_element {

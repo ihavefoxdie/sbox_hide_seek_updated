@@ -17,7 +17,8 @@
                 <div class="hs_window_input_button" onclick=@Play>Play</div>
             </div>
         </div>
-        <div class="maps">
+        <div class="maps_background">
+            <div class="maps">
             @if (MapsFound != null && MapsFound.Length > 0)
             {
                 for (int i = 0; i < MapsFound.Length; i++)
@@ -30,6 +31,7 @@
                     </div>
                 }
             }
+            </div>
         </div>
     </div>
 </root>

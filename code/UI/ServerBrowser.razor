@@ -4,13 +4,70 @@
 @namespace HideAndSeek.UI
 
 <root>
-	<div class="hs_window">
+    <div class="hs_window">
+        <div class="header">
+            <div class="search">
+                <TextEntry MaxLength="@(20)" placeholder="Session name" class="hs_search_entry" @ref="Entry"></TextEntry>
+                <div class="hs_window_input_button"><i style="align-items: center;">search</i></div>
+            </div>
+            <div class="search">
+                <TextEntry MaxLength="@(20)" placeholder="Map name" class="hs_search_entry" @ref="Entry"></TextEntry>
+                <div class="hs_window_input_button"><i style="align-items: center;">search</i></div>
+            </div>
+        </div>
+        <div class="servers">
+            @if(true)
+            {
+                <div class="servers_header">
+                    <div style="width: 7vw; overflow-x: hidden;">
+                        <i style="align-items: center;">badge</i>Name
+                        </div>
+                    <div style="max-width: 100px; text-overflow: ellipsis;">
+                        <i style="align-items: center;">perm_identity</i>Players
+                    </div>
+                    <div style="max-width: 350px; overflow-x: hidden;">
+                        <i style="align-items: center;">location_city</i>Map
+                        </div>
+                </div>
+                <div class="server_list_background">
+                    <div class="server_list">
+                    @for (int i = 0; i < 25; i++)
+                    {
+                        <button class="hs_button">
+                            <div style="width: 14vw; overflow-x: hidden; text-overflow: ellipsis;">sadasdasdasdasdadasdsa</div>
+                            <div style="justify-content:center; width: 5vw; text-overflow: ellipsis;">25/30</div>
+                            <div style="justify-content:flex-end; width: 10vw; overflow-x: hidden; text-overflow: ellipsis;">asdaasdasdasdsadasdasdasdsdas</div>
+                        </button>
+                    }
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </root>
 
 @code
 {
+    private List<Sandbox.Network.LobbyInformation> Lobbies;
+    private bool BrowserState = false;
+    private bool Status = false;
+    private TextEntry Entry;
 
+    private async void BrowseServers()
+    {
+        if (BrowserState)
+        {
+            Status = true;
+
+            Lobbies = await Networking.QueryLobbies("purpeliz.hide_seek_updated");
+            await Task.DelayRealtimeSeconds(5);
+            if (Lobbies is null || Lobbies.Count < 1)
+            {
+                Status = false;
+            }
+            Log.Info("Servers: " + Lobbies.Count);
+        }
+    }
 
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
