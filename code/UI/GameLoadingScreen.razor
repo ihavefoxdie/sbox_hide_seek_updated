@@ -53,7 +53,7 @@
 
     protected override void OnStart()
     {
-        MapPackage = Package.FetchAsync(LoadingElement, true).Result;
+        MapPackage = Package.Fetch(LoadingElement, true).Result;
     }
 
     protected override void OnFixedUpdate()
