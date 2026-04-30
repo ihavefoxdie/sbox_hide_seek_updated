@@ -15,20 +15,27 @@ public struct Team
 	/// <summary>
 	/// List of player connections in this team.
 	/// </summary>
-	public List<Guid> TeamPlayers { get; set; }
+	public List<Guid> Players { get; set; }
 
 	public Team( string name, string color )
 	{
 		Name = name;
 		Color = color;
-		TeamPlayers = [];
+		Players = [];
+	}
+
+	public Team( string name, string color, IEnumerable<Guid> players)
+	{
+		Name = name;
+		Color = color;
+		Players = [.. players];
 	}
 
 	public Team()
 	{
 		Name = "Unnamed";
 		Color = "Blue";
-		TeamPlayers = [];
+		Players = [];
 	}
 
 }
