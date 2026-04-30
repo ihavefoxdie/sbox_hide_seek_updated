@@ -5,19 +5,47 @@ namespace HideAndSeek.GameLoop.Rules;
 public struct Round
 {
 	#region Properties
+	/// <summary>
+	/// Time since the start of the round.
+	/// </summary>
 	public TimeSince TimeSinceStart { get; private set; }
 	/// <summary>
-	/// RoundLength in seconds
+	/// Round length, in seconds.
 	/// </summary>
 	public int RoundLength { get; private set; }
+	/// <summary>
+	/// Is round in progress?
+	/// </summary>
 	public bool IsStarted { get; private set; } = false;
+	/// <summary>
+	/// Should the round end?
+	/// </summary>
+	public readonly bool ShouldRoundEnd
+	{
+		get
+		{
+			if ( TimeSinceStart.Relative >= RoundLength )
+			{
+				return true;
+			}
+			return false;
+		}
+	}
 	#endregion
 
 
 
 	#region Actions
-	public Action End { get; set; }
-	public Action Start { get; set; }
+	/// <summary>
+	/// Gets invoked when the end event occurs.
+	/// </summary>
+	public Action OnEnd { get; set; }
+	/// <summary>
+	/// Gets invoked when the start event occurs.
+	/// </summary>
+	/// <remarks>Assign a delegate to perform custom initialization or startup logic. If not set, no action is
+	/// performed when the start event occurs.</remarks>
+	public Action OnStart { get; set; }
 	#endregion
 
 
@@ -32,7 +60,7 @@ public struct Round
 		RoundLength = 300;
 	}
 
-	public Round( int roundLength = 300 )
+	public Round( int roundLength )
 	{
 		RoundLength = roundLength;
 	}
@@ -40,28 +68,25 @@ public struct Round
 
 
 	#region Methods
+	/// <summary>
+	/// Start the round.
+	/// </summary>
 	public void StartTheRound()
 	{
-		if(IsStarted) return;
+		if ( IsStarted ) return;
 
 		TimeSinceStart = 0;
-		Start?.Invoke();
+		OnStart?.Invoke();
 		IsStarted = true;
 	}
 
+	/// <summary>
+	/// End the round.
+	/// </summary>
 	public void EndTheRound()
 	{
-		End?.Invoke();
+		OnEnd?.Invoke();
 		IsStarted = false;
-	}
-
-	public bool CheckRoundTime()
-	{
-		if ( TimeSinceStart.Relative >= RoundLength )
-		{
-			return true;
-		}
-		return false;
 	}
 	#endregion
 }
