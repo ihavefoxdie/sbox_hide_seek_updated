@@ -12,13 +12,13 @@
     @if (HostPressed)
     {
         <div class="menu_window">
-            <HostMenu Play="@Play" @ref="MapSelection" style="opacity: @MenuOpacity;"/>
+            <HostMenu Play="@Play" @ref="MapSelection" PanelOpacity=@MenuOpacity />
         </div>
     }
     @if (ServerBrowserPressed)
     {
         <div class="menu_window">
-            <ServerBrowser style="opacity: @MenuOpacity;"></ServerBrowser>
+            <ServerBrowser PanelOpacity=@MenuOpacity></ServerBrowser>
         </div>
     }
     <div class="menu_items" style="opacity: @ControlsOpacity;">
@@ -38,7 +38,7 @@
 {
     private bool HostPressed = false;
     private bool ServerBrowserPressed = false;
-    private double MenuOpacity = 1;
+    private int MenuOpacity = 1;
     private double ControlsOpacity = 1;
     private HostMenu MapSelection { get; set; }
     public string MyStringValue { get; set; } = "Hide&Seek";

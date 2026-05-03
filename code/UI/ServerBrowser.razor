@@ -4,7 +4,7 @@
 @namespace HideAndSeek.UI
 
 <root>
-    <div class="hs_window">
+    <div class="hs_window" style="opacity: @PanelOpacity">
         <div class="header">
             <div class="search">
                 <TextEntry MaxLength="@(20)" placeholder="Session name" class="hs_search_entry" @ref="Entry"></TextEntry>
@@ -52,6 +52,7 @@
     private bool BrowserState = false;
     private bool Status = false;
     private TextEntry Entry;
+    public double PanelOpacity { get; set; } = 1;
 
     private async void BrowseServers()
     {
