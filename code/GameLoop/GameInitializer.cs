@@ -48,18 +48,14 @@ public class GameInitializer : GameObjectSystem
 		if ( Scene.GetAll<MainMenuUI>().Any() || Scene.GetAll<GameManager>().Any() || Scene.IsEditor )
 		{
 #if DEBUG
-			Log.Warning( $"Not a loading scene. Skipping {this}" );
+			Log.Warning( $"A special scene. Skipping {this}" );
 #endif
 			return;
 		}
 
-#if DEBUG
-		Log.Warning( "Loading screen scene detected." );
-#endif
-
-		GameObject gameLoop = Scene.CreateObject();
-		gameLoop.Name = "GameLoop";
-		gameLoop.AddComponent<GameManager>();
+		GameObject ganeManager = Scene.CreateObject();
+		ganeManager.Name = "GameLoop";
+		ganeManager.AddComponent<GameManager>();
 
 		_loadingScreen = Scene.GetAll<GameLoadingScreen>().FirstOrDefault();
 		Settings = new UserGameSettings();
@@ -82,8 +78,12 @@ public class GameInitializer : GameObjectSystem
 				MapIdent = info.FullIdent;
 			}
 		}
+		else
+		{
+			MapIdent = "facepunch.flatgrass";
+		}
 
-		_loadingScreen.LoadingElement = MapIdent;
+		_loadingScreen?.LoadingElement = MapIdent;
 
 		await Task.Delay( 5000 );
 		GameObject map = Scene.CreateObject();
