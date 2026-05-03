@@ -406,7 +406,7 @@
               "EnhancedCcd": false,
               "Gravity": true,
               "GravityScale": 1,
-              "ImpactDamage": 1,
+              "ImpactDamage": 300,
               "LinearDamping": 0,
               "Locking": {
                 "X": false,
@@ -418,7 +418,7 @@
               },
               "MassCenterOverride": "0,0,0",
               "MassOverride": 0,
-              "MinImpactDamageSpeed": 1,
+              "MinImpactDamageSpeed": 300,
               "MotionEnabled": true,
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
@@ -1024,9 +1024,6 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
-      },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
           "$blob": "256863d5-4005-405a-822a-f2ec0cc75f11"
@@ -1036,6 +1033,9 @@
         "Data": {
           "SelectionSets": []
         }
+      },
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
       }
     }
   },
