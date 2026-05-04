@@ -4,6 +4,13 @@ using System.Threading.Tasks;
 
 namespace HideAndSeek.GameLoop;
 
+/// <summary>
+/// Provides static methods for loading and transitioning between scenes within the application.
+/// </summary>
+/// <remarks>The LevelLoader class offers both synchronous and asynchronous scene loading capabilities. Use
+/// ChangeScene for immediate scene changes, or TransitionToSceneAsync to notify and await components that implement
+/// IBeforeSceneChangeListener before transitioning. All methods return a value indicating whether the scene load was
+/// successful.</remarks>
 public static class LevelLoader
 {
 	/// <summary>
