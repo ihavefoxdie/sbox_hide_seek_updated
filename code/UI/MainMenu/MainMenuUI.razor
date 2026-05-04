@@ -57,7 +57,7 @@
         gameSettings.MapName = SelectedMap;
         Log.Info(gameSettings.MapName);
         gameSettings.SaveSettings();
-        await LevelLoader.ChangeScene("scenes/LoadingScreen.scene", false, Game.ActiveScene);
+        await LevelLoader.TransitionToSceneAsync("scenes/LoadingScreen.scene", false, Game.ActiveScene);
     }
 
     private async void OpenMenu(string button)
