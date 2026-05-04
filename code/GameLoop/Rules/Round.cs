@@ -12,7 +12,33 @@ public struct Round
 	/// <summary>
 	/// Round length, in seconds.
 	/// </summary>
-	public int RoundLength { get; private set; }
+	/// <remarks>Cannot be less than 10 seconds.</remarks>
+	public int RoundLength
+	{
+		get;
+		private set
+		{
+			if ( value >= 10 )
+			{
+				field = value;
+			}
+		}
+	}
+	/// <summary>
+	/// Gets the maximum number of rounds allowed.
+	/// </summary>
+	/// <remarks>Cannot be less than 1.</remarks>
+	public int RoundLimit
+	{
+		get;
+		private set
+		{
+			if ( value > 0 )
+			{
+				field = value;
+			}
+		}
+	}
 	/// <summary>
 	/// Is round in progress?
 	/// </summary>
