@@ -84,11 +84,13 @@ public struct Round
 	public Round()
 	{
 		RoundLength = 300;
+		RoundLimit = 5;
 	}
 
-	public Round( int roundLength )
+	public Round( int roundLength, int roundsLimit )
 	{
 		RoundLength = roundLength;
+		RoundLimit = roundsLimit;
 	}
 
 
