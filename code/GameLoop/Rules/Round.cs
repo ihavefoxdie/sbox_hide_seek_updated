@@ -35,17 +35,17 @@ public struct Round
 
 
 
-	#region Actions
+	#region Events
 	/// <summary>
 	/// Gets invoked when the end event occurs.
 	/// </summary>
-	public Action OnEnd { get; set; }
+	public event Action OnEnd;
 	/// <summary>
 	/// Gets invoked when the start event occurs.
 	/// </summary>
 	/// <remarks>Assign a delegate to perform custom initialization or startup logic. If not set, no action is
 	/// performed when the start event occurs.</remarks>
-	public Action OnStart { get; set; }
+	public event Action OnStart;
 	#endregion
 
 
