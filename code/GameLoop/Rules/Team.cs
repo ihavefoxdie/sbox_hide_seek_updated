@@ -15,27 +15,49 @@ public struct Team
 	/// <summary>
 	/// List of player connections in this team.
 	/// </summary>
-	public List<Guid> Players { get; set; }
+	private List<Guid> _players { get; set; }
+
+	public IReadOnlyList<Guid> Players => _players.AsReadOnly();
 
 	public Team( string name, string color )
 	{
 		Name = name;
 		Color = color;
-		Players = [];
+		_players = [];
 	}
 
 	public Team( string name, string color, IEnumerable<Guid> players)
 	{
 		Name = name;
 		Color = color;
-		Players = [.. players];
+		_players = [.. players];
 	}
 
 	public Team()
 	{
 		Name = "Unnamed";
 		Color = "Blue";
-		Players = [];
+		_players = [];
 	}
 
+	public void AddPlayer( Guid playerId )
+	{
+		if ( !Players.Contains( playerId ) )
+		{
+			_players.Add( playerId );
+		}
+	}
+
+	public void RemovePlayer( Guid playerId )
+	{
+		if ( Players.Contains( playerId ) )
+		{
+			_players.Remove( playerId );
+		}
+	}
+
+	public bool IsThePlayerInTeam( Guid playerId )
+	{
+		return Players.Contains( playerId );
+	}
 }

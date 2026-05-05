@@ -9,6 +9,12 @@ public struct Round
 	/// Time since the start of the round.
 	/// </summary>
 	public TimeSince TimeSinceStart { get; private set; }
+
+	/// <summary>
+	/// Gets the number of rounds completed in the current session.
+	/// </summary>
+	public int CurrentRoundCount { get; private set; } = 0;
+
 	/// <summary>
 	/// Round length, in seconds.
 	/// </summary>
@@ -24,6 +30,7 @@ public struct Round
 			}
 		}
 	}
+
 	/// <summary>
 	/// Gets the maximum number of rounds allowed.
 	/// </summary>
@@ -39,10 +46,12 @@ public struct Round
 			}
 		}
 	}
+
 	/// <summary>
 	/// Is round in progress?
 	/// </summary>
 	public bool IsStarted { get; private set; } = false;
+
 	/// <summary>
 	/// Should the round end?
 	/// </summary>
@@ -50,71 +59,126 @@ public struct Round
 	{
 		get
 		{
-			if ( TimeSinceStart.Relative >= RoundLength )
+			if ( TimeSinceStart.Relative >= RoundLength + PrepTime )
 			{
 				return true;
 			}
 			return false;
 		}
 	}
-	#endregion
 
+	public readonly bool ShouldSeekersBeEnabled
+	{
+		get
+		{
+			if ( TimeSinceStart.Relative >= PrepTime )
+			{
+				return true;
+			}
+			return false;
+		}
+	}
 
+	public readonly bool CanRoundStart
+	{
+		get
+		{
+			return CurrentRoundCount < RoundLimit;
+		}
+	}
 
-	#region Events
 	/// <summary>
-	/// Gets invoked when the end event occurs.
+	/// Time before seekers get enabled in seconds.
 	/// </summary>
-	public event Action OnEnd;
+	/// <remarks>Cannot be less than 5 seconds.</remarks>
+	public int PrepTime
+	{
+		get;
+		private set
+		{
+			if ( value >= 5 )
+			{
+				field = value;
+			}
+		}
+	}
 	/// <summary>
-	/// Gets invoked when the start event occurs.
+	/// Time before the next round starts (after the previous has ended).
 	/// </summary>
-	/// <remarks>Assign a delegate to perform custom initialization or startup logic. If not set, no action is
-	/// performed when the start event occurs.</remarks>
-	public event Action OnStart;
+	/// <remarks>Cannot be less than 5 seconds.</remarks>
+	public int TimeBeforeNextRound
+	{
+		get;
+		private set
+		{
+			if ( value >= 5 )
+			{
+				field = value;
+			}
+		}
+	}
 	#endregion
 
 
 
 	#region Variables
+	private const int DefaultRoundLength = 300;
+	private const int DefaultRoundLimit = 5;
+	private const int DefaultTimeBeforeNextRound = 5;
+	private const int DefaultPrepTime = 5;
 	#endregion
 
 
 
 	public Round()
 	{
-		RoundLength = 300;
-		RoundLimit = 5;
+		RoundLength = DefaultRoundLength;
+		RoundLimit = DefaultRoundLimit;
+		PrepTime = DefaultPrepTime;
+		TimeBeforeNextRound = DefaultTimeBeforeNextRound;
 	}
 
-	public Round( int roundLength, int roundsLimit )
+	public Round( int roundLength, int roundsLimit, int timeBeforeNextRound, int prepTime)
 	{
 		RoundLength = roundLength;
 		RoundLimit = roundsLimit;
+		TimeBeforeNextRound = timeBeforeNextRound;
+		PrepTime = prepTime;
 	}
-
-
 
 	#region Methods
 	/// <summary>
-	/// Start the round.
+	/// Starts a round when not already started and when CanRoundStart is true.
 	/// </summary>
-	public void StartTheRound()
+	/// <remarks>On success, sets IsStarted to true, resets TimeSinceStart to 0, and increments CurrentRoundCount.
+	/// No state changes occur if the round is not started.</remarks>
+	/// <returns><c>true</c> if the round was started; otherwise <c>false</c> (for example, if already started or CanRoundStart is <c>false</c>).</returns>
+	public bool StartRound()
 	{
-		if ( IsStarted ) return;
+		if ( !IsStarted && CanRoundStart )
+		{
+			IsStarted = true;
+			TimeSinceStart = 0;
+			CurrentRoundCount++;
+			return true;
+		}
 
-		TimeSinceStart = 0;
-		OnStart?.Invoke();
-		IsStarted = true;
+		return false;
 	}
 
 	/// <summary>
-	/// End the round.
+	/// Ends the current round.
 	/// </summary>
-	public void EndTheRound()
+	/// <remarks>Sets IsStarted to false when a round is ended.</remarks>
+	/// <returns><c>true</c> if a round was ended; otherwise, <c>false</c>.</returns>
+	public bool EndRound()
 	{
-		OnEnd?.Invoke();
-		IsStarted = false;
+		if ( IsStarted )
+		{
+			IsStarted = false;
+			return true;
+		}
+		return false;
 	}
 	#endregion
 }
