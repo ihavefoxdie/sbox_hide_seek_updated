@@ -23,7 +23,7 @@ namespace HideAndSeek.GameLoop.States
 		{
 			if ( _roundStateMachine.Round.ShouldSeekersBeEnabled )
 			{
-				_roundStateMachine.ChangeState( new ActiveRoundState( _roundStateMachine ) );
+				_roundStateMachine.ChangeState( this );
 			}
 		}
 	}

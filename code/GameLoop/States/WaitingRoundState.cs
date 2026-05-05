@@ -1,9 +1,11 @@
-﻿using System;
+﻿using HideAndSeek.GameLoop.StateMachines;
 
 namespace HideAndSeek.GameLoop.States;
 
-public class WaitingRoundState : IRoundState
+public class WaitingRoundState( RoundStateMachine roundStateMachine ) : IRoundState
 {
+	private readonly RoundStateMachine _roundStateMachine = roundStateMachine;
+
 	public void Enter()
 	{
 	}
@@ -12,5 +14,6 @@ public class WaitingRoundState : IRoundState
 	}
 	public void Update()
 	{
+		//if(_roundStateMachine.Round.)
 	}
 }
