@@ -163,7 +163,7 @@ public struct Round
 	/// <returns><c>true</c> if the round was started; otherwise <c>false</c> (for example, if already started or CanRoundStart is <c>false</c>).</returns>
 	public bool StartRound()
 	{
-		if ( !IsStarted && HasTheGameEnded )
+		if ( !IsStarted && !HasTheGameEnded )
 		{
 			IsStarted = true;
 			TimeSinceStart = 0;
