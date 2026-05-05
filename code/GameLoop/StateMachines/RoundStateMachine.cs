@@ -1,8 +1,7 @@
 ﻿using HideAndSeek.GameLoop.Rules;
 using HideAndSeek.GameLoop.States;
+using Sandbox.GameLoop.States;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HideAndSeek.GameLoop.StateMachines
 {
@@ -15,10 +14,14 @@ namespace HideAndSeek.GameLoop.StateMachines
 		[Rpc.Broadcast]
 		public void ChangeState( IRoundState state )
 		{
-			_currentState = state;
+			_currentState = RoundStateResolver.ResolveState( state, this );
 		}
 
-		protected void SomethingSomething()
+		protected override void OnAwake()
+		{
+		}
+
+		protected override void OnUpdate()
 		{
 			if ( _currentState != null )
 			{
