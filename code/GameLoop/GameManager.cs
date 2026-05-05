@@ -4,15 +4,18 @@ namespace HideAndSeek.GameLoop;
 
 public sealed class GameManager : Component
 {
-	private Round Round = new();
-	private Team[] Teams = new Team[2]
+	protected override void OnAwake()
 	{
-		new Team("Seekers", "Red"),
-		new Team("Hiders", "Blue")
-	};
+		GameObject.AddComponent<GameLoop>();
+	}
 
 	protected override void OnUpdate()
 	{
 
+	}
+
+	protected override void OnDisabled()
+	{
+		base.OnDisabled();
 	}
 }
