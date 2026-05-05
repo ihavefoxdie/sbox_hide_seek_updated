@@ -79,11 +79,19 @@ public struct Round
 		}
 	}
 
-	public readonly bool CanRoundStart
+	public readonly bool HasTheGameEnded
 	{
 		get
 		{
-			return CurrentRoundCount < RoundLimit;
+			return CurrentRoundCount >= RoundLimit;
+		}
+	}
+
+	public readonly bool HasPostRoundEnded
+	{
+		get
+		{
+			return TimeSinceStart.Relative >= RoundLength + PrepTime + TimeBeforeNextRound;
 		}
 	}
 
@@ -155,7 +163,7 @@ public struct Round
 	/// <returns><c>true</c> if the round was started; otherwise <c>false</c> (for example, if already started or CanRoundStart is <c>false</c>).</returns>
 	public bool StartRound()
 	{
-		if ( !IsStarted && CanRoundStart )
+		if ( !IsStarted && HasTheGameEnded )
 		{
 			IsStarted = true;
 			TimeSinceStart = 0;
