@@ -15,20 +15,25 @@ namespace HideAndSeek.GameLoop.StateMachines
 		[Rpc.Broadcast]
 		public void ChangeState( RoundState state )
 		{
+			_currentState?.Exit();
 			_currentState = RoundStateResolver.ResolveState( state, this );
+			_currentState.Enter();
+			OnStateChanged?.Invoke( _currentState );
 		}
 
 		protected override void OnAwake()
 		{
 			GameLoop = Scene.GetAllComponents<GameLoop>().FirstOrDefault();
+			if ( Networking.IsHost )
+			{
+				ChangeState( null );
+			}
 		}
 
 		protected override void OnUpdate()
 		{
-			if ( _currentState != null )
-			{
-				_currentState.Update();
-			}
+			if ( Networking.IsHost )
+				_currentState?.Update();
 		}
 	}
 }
