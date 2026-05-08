@@ -2,18 +2,19 @@
 
 namespace HideAndSeek.GameLoop.States;
 
-public class WaitingRoundState( RoundStateMachine roundStateMachine ) : IRoundState
+public class WaitingRoundState( RoundStateMachine roundStateMachine ) : RoundState( roundStateMachine )
 {
-	private readonly RoundStateMachine _roundStateMachine = roundStateMachine;
-
-	public void Enter()
+	public override void Enter()
 	{
 	}
-	public void Exit()
+	public override	void Exit()
 	{
 	}
-	public void Update()
+	public override void Update()
 	{
-		//if(_roundStateMachine.Round.)
+		if( Connection.All.Count(x => x.IsActive) > 1)
+		{
+			RoundStateMachine.ChangeState( this );
+		}
 	}
 }

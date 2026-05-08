@@ -2,7 +2,7 @@
 
 namespace HideAndSeek.GameLoop.States;
 
-public interface IRoundState
+public interface IState
 {
 	public void Enter();
 	public void Exit();

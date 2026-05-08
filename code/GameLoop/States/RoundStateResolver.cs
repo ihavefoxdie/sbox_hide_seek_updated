@@ -5,7 +5,7 @@ namespace Sandbox.GameLoop.States;
 
 public class RoundStateResolver
 {
-	public static IRoundState ResolveState( IRoundState state, RoundStateMachine stateMachine )
+	public static RoundState ResolveState( RoundState state, RoundStateMachine stateMachine )
 	{
 		switch ( state )
 		{

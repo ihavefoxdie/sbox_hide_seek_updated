@@ -2,26 +2,24 @@
 
 namespace HideAndSeek.GameLoop.States
 {
-	public class PostRoundState( RoundStateMachine roundStateMachine ) : IRoundState
+	public class PostRoundState( RoundStateMachine roundStateMachine ) : RoundState( roundStateMachine )
 	{
-		private readonly RoundStateMachine _roundStateMachine = roundStateMachine;
-
-		public void Enter()
+		public override	void Enter()
 		{
 		}
 
-		public void Exit()
+		public override	void Exit()
 		{
 		}
 
-		public void Update()
+		public override	void Update()
 		{
-			if ( _roundStateMachine.Round.HasTheGameEnded )
+			if ( RoundStateMachine.GameLoop.Round.ShouldTheGameEnd )
 				return;
 
-			if ( _roundStateMachine.Round.HasPostRoundEnded )
+			if ( RoundStateMachine.GameLoop.Round.HasPostRoundEnded )
 			{
-				_roundStateMachine.ChangeState( this );
+				RoundStateMachine.ChangeState( this );
 			}
 		}
 	}

@@ -1,32 +1,24 @@
 ﻿using HideAndSeek.GameLoop.StateMachines;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HideAndSeek.GameLoop.States
 {
-	public class ActiveRoundState : IRoundState
+	public class ActiveRoundState( RoundStateMachine roundStateMachine ) : RoundState( roundStateMachine )
 	{
-		private RoundStateMachine _roundStateMachine;
-
-		public ActiveRoundState( RoundStateMachine roundStateMachine )
+		public override void Enter()
 		{
-			_roundStateMachine = roundStateMachine;
 		}
 
-		public void Enter()
+		public override void Exit()
 		{
-			throw new NotImplementedException();
+
 		}
 
-		public void Exit()
+		public override void Update()
 		{
-			throw new NotImplementedException();
-		}
-
-		public void Update()
-		{
-			throw new NotImplementedException();
+			if ( RoundStateMachine.GameLoop.Round.ShouldRoundEnd )
+			{
+				RoundStateMachine.ChangeState( this );
+			}
 		}
 	}
 }

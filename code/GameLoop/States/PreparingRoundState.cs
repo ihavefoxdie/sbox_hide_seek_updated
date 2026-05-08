@@ -2,28 +2,29 @@
 
 namespace HideAndSeek.GameLoop.States
 {
-	public class PreparingRoundState : IRoundState
+	public class PreparingRoundState( RoundStateMachine roundStateMachine ) : RoundState( roundStateMachine )
 	{
-		private readonly RoundStateMachine _roundStateMachine;
-
-		public PreparingRoundState(RoundStateMachine roundStateMachine)
+		public override void Enter()
 		{
-			_roundStateMachine = roundStateMachine;
-		}
-
-		public void Enter()
-		{
-		}
-
-		public void Exit()
-		{
-		}
-
-		public void Update()
-		{
-			if ( _roundStateMachine.Round.ShouldSeekersBeEnabled )
+			foreach ( var team in RoundStateMachine.GameLoop.Teams )
 			{
-				_roundStateMachine.ChangeState( this );
+				team.FlushPlayers();
+			}
+
+			RoundStateMachine.GameLoop.AssignPlayers();
+			RoundStateMachine.GameLoop.Round.EndRound();
+			RoundStateMachine.GameLoop.Round.StartRound();
+		}
+
+		public override void Exit()
+		{
+		}
+
+		public override void Update()
+		{
+			if ( RoundStateMachine.GameLoop.Round.ShouldSeekersBeEnabled )
+			{
+				RoundStateMachine.ChangeState( this );
 			}
 		}
 	}

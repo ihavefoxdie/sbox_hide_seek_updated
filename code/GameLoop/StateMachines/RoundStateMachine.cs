@@ -8,11 +8,12 @@ namespace HideAndSeek.GameLoop.StateMachines
 	public class RoundStateMachine : Component
 	{
 		public GameLoop GameLoop;
-		private IRoundState _currentState;
-		public event Action<IRoundState> OnStateChanged;
+
+		private RoundState _currentState;
+		public event Action<IState> OnStateChanged;
 
 		[Rpc.Broadcast]
-		public void ChangeState( IRoundState state )
+		public void ChangeState( RoundState state )
 		{
 			_currentState = RoundStateResolver.ResolveState( state, this );
 		}
