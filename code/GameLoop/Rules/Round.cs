@@ -2,7 +2,7 @@
 
 namespace HideAndSeek.GameLoop.Rules;
 
-public struct Round
+public class Round
 {
 	#region Properties
 	/// <summary>
@@ -55,11 +55,11 @@ public struct Round
 	/// <summary>
 	/// Should the round end?
 	/// </summary>
-	public readonly bool ShouldRoundEnd
+	public bool ShouldRoundEnd
 	{
 		get
 		{
-			if ( TimeSinceStart.Relative >= RoundLength + PrepTime )
+			if ( TimeSinceStart.Relative >= RoundLength + PrepTime && IsStarted )
 			{
 				return true;
 			}
@@ -67,11 +67,11 @@ public struct Round
 		}
 	}
 
-	public readonly bool ShouldSeekersBeEnabled
+	public bool ShouldSeekersBeEnabled
 	{
 		get
 		{
-			if ( TimeSinceStart.Relative >= PrepTime )
+			if ( TimeSinceStart.Relative >= PrepTime && IsStarted )
 			{
 				return true;
 			}
@@ -79,7 +79,7 @@ public struct Round
 		}
 	}
 
-	public readonly bool HasTheGameEnded
+	public bool ShouldTheGameEnd
 	{
 		get
 		{
@@ -87,7 +87,7 @@ public struct Round
 		}
 	}
 
-	public readonly bool HasPostRoundEnded
+	public bool HasPostRoundEnded
 	{
 		get
 		{
@@ -163,7 +163,7 @@ public struct Round
 	/// <returns><c>true</c> if the round was started; otherwise <c>false</c> (for example, if already started or CanRoundStart is <c>false</c>).</returns>
 	public bool StartRound()
 	{
-		if ( !IsStarted && !HasTheGameEnded )
+		if ( !IsStarted && !ShouldTheGameEnd )
 		{
 			IsStarted = true;
 			TimeSinceStart = 0;
