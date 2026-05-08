@@ -2,7 +2,7 @@
 
 namespace HideAndSeek.GameLoop.Rules;
 
-public struct Team
+public class Team
 {
 	/// <summary>
 	/// Team's name.
@@ -54,6 +54,11 @@ public struct Team
 		{
 			_players.Remove( playerId );
 		}
+	}
+
+	public void FlushPlayers()
+	{
+		_players.Clear();
 	}
 
 	public bool IsThePlayerInTeam( Guid playerId )
