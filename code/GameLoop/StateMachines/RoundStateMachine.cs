@@ -7,7 +7,7 @@ namespace HideAndSeek.GameLoop.StateMachines
 {
 	public class RoundStateMachine : Component
 	{
-		public Round Round { get; private set; }
+		public GameLoop GameLoop;
 		private IRoundState _currentState;
 		public event Action<IRoundState> OnStateChanged;
 
@@ -19,6 +19,7 @@ namespace HideAndSeek.GameLoop.StateMachines
 
 		protected override void OnAwake()
 		{
+			GameLoop = Scene.GetAllComponents<GameLoop>().FirstOrDefault();
 		}
 
 		protected override void OnUpdate()
