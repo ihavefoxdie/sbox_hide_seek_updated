@@ -7,18 +7,13 @@ public class RoundStateResolver
 {
 	public static RoundState ResolveState( RoundState state, RoundStateMachine stateMachine )
 	{
-		switch ( state )
+		return state switch
 		{
-			case PreparingRoundState:
-				return new ActiveRoundState( stateMachine );
-			case ActiveRoundState:
-				return new PostRoundState( stateMachine );
-			case PostRoundState:
-				return new PreparingRoundState( stateMachine );
-			case WaitingRoundState:
-				return new PreparingRoundState( stateMachine );
-			default:
-				return new PreparingRoundState( stateMachine );
-		}
+			PreparingRoundState => new ActiveRoundState( stateMachine ),
+			ActiveRoundState => new PostRoundState( stateMachine ),
+			PostRoundState => new PreparingRoundState( stateMachine ),
+			WaitingRoundState => new PreparingRoundState( stateMachine ),
+			_ => new WaitingRoundState( stateMachine ),
+		};
 	}
 }
