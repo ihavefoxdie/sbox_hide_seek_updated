@@ -6,7 +6,7 @@ public sealed class GameManager : Component
 {
 	protected override void OnAwake()
 	{
-		GameObject.AddComponent<GameLoop>();
+		GameObject.GetOrAddComponent<GameLoop>();
 	}
 
 	protected override void OnUpdate()
