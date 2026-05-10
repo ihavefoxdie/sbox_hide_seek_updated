@@ -4,7 +4,7 @@ using System;
 
 namespace HideAndSeek.GameLoop;
 
-public sealed class GameLoop : Component, Component.INetworkSnapshot
+public sealed class GameLoop : Component, Component.INetworkListener
 {
 	private UserGameSettings _gameSettings;
 	private RoundStateMachine _roundStateMachine;
@@ -46,6 +46,15 @@ public sealed class GameLoop : Component, Component.INetworkSnapshot
 		}
 	}
 
+	public void OnDisconnected( Connection connection )
+	{
+		Hiders.RemovePlayer( connection.Id );
+		Seekers.RemovePlayer( connection.Id );
+	}
+
+	public void OnActive( Connection connection )
+	{
+	}
 
 	public void AssignPlayers()
 	{
