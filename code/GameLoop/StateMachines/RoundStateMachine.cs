@@ -30,7 +30,7 @@ namespace HideAndSeek.GameLoop.StateMachines
 			}
 		}
 
-		protected override void OnUpdate()
+		protected override void OnFixedUpdate()
 		{
 			if ( Networking.IsHost )
 				_currentState?.Update();
