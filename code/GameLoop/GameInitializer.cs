@@ -38,9 +38,10 @@ public class GameInitializer : GameObjectSystem
 				return;
 			}
 
-			GameObject ganeManager = Scene.CreateObject();
-			ganeManager.Name = "GameLoop";
-			ganeManager.AddComponent<GameManager>();
+			GameObject gameManager = Scene.CreateObject();
+			gameManager.Name = "GameLoop";
+			gameManager.GetOrAddComponent<GameManager>();
+			gameManager.NetworkMode = NetworkMode.Object;
 
 			Settings = new UserGameSettings();
 			Settings.LoadSettings();
