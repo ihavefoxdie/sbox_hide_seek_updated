@@ -9,9 +9,10 @@ public sealed class GameLoop : Component, Component.INetworkSnapshot
 	private UserGameSettings _gameSettings;
 	private RoundStateMachine _roundStateMachine;
 
-	[Property]
 	[Sync( SyncFlags.FromHost )]
-	public Team[] Teams { get; set; }
+	public Team Seekers { get; set; }
+	[Sync( SyncFlags.FromHost )]
+	public Team Hiders { get; set; }
 
 	[Property]
 	[Sync( SyncFlags.FromHost )]
@@ -20,17 +21,18 @@ public sealed class GameLoop : Component, Component.INetworkSnapshot
 	protected override void OnAwake()
 	{
 		_gameSettings = new UserGameSettings();
+
 		if ( Networking.IsHost )
 		{
-			Round = new Round();
-			Teams =
-			[
-				new Team("Seekers", "Red"),
-				new Team("Hiders", "Blue")
-			];
+			Hiders = GameObject.AddComponent<Team>();
+			Seekers = GameObject.AddComponent<Team>();
+
+			Round = new Round( 1, 1, 1, 1 );
+			Seekers.Init( "Seekers", "Red" );
+			Hiders.Init( "Hiders", "Blue" );
 		}
 			
-		_roundStateMachine= GameObject.GetOrAddComponent<RoundStateMachine>();
+		_roundStateMachine = GameObject.GetOrAddComponent<RoundStateMachine>();
 	}
 
 	protected override void OnEnabled()
@@ -47,30 +49,31 @@ public sealed class GameLoop : Component, Component.INetworkSnapshot
 
 	public void AssignPlayers()
 	{
+		if ( !Networking.IsHost )
+		{
+			Log.Info( "Only the host can assign players to teams." );
+			return;
+		}
+		Log.Info( "Assigning players to teams." );
+
 		int seekersCount = Math.Max( Connection.All.Count / 10, 1 );
-		Team seekers = Teams.FirstOrDefault( x => x.Name == "Seekers" );
-		Team hiders = Teams.FirstOrDefault( x => x.Name == "Hiders" );
 
 		for ( int i = 0; i < seekersCount; i++ )
 		{
 			int index = Game.Random.Next( Connection.All.Count );
 			var connection = Connection.All.ElementAt( index );
 
-			if ( seekers.IsThePlayerInTeam( connection.Id ) )
-				continue;
-
-			seekers.AddPlayer( connection.Id );
+			Seekers.AddPlayer( connection.Id );
 			//RespawnPlayer( connId );
 		}
 
 		//assigning the remaining players to hiders team
 		for ( int i = 0; i < Connection.All.Count; i++ )
 		{
-			if ( !seekers.IsThePlayerInTeam( Connection.All[i].Id ) )
+			if ( !Seekers.IsThePlayerInTeam( Connection.All[i].Id ) )
 			{
-				// Spawn this object and make the client the owner
 				//RespawnPlayer( Connection.All[i].Id, "hiders" );
-				hiders.AddPlayer( Connection.All[i].Id );
+				Hiders.AddPlayer( Connection.All[i].Id );
 			}
 		}
 	}

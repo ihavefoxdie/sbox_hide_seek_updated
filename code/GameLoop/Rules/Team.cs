@@ -1,64 +1,61 @@
-﻿using System;
+﻿using Sandbox.GameLoop.Rules;
+using System;
 
 namespace HideAndSeek.GameLoop.Rules;
 
-public class Team
+public class Team : Component
 {
-	/// <summary>
-	/// Team's name.
-	/// </summary>
-	public string Name { get; set; }
-	/// <summary>
-	/// Team's color.
-	/// </summary>
-	public string Color { get; set; }
-	/// <summary>
-	/// List of player connections in this team.
-	/// </summary>
-	private List<Guid> _players { get; set; }
+	[Property]
+	[Sync( SyncFlags.FromHost, Flags = SyncFlags.Query)]
+	public TeamData TeamData { get; set; }
 
-	public IReadOnlyList<Guid> Players => _players.AsReadOnly();
+	[Sync]
+	public NetList<Guid> Players { get; set; } = [];
 
-	public Team( string name, string color )
+	public void Init( string name, string color )
 	{
-		Name = name;
-		Color = color;
-		_players = [];
+		TeamData = new TeamData
+		{
+			Name = name,
+			Color = color
+		};
 	}
 
-	public Team( string name, string color, IEnumerable<Guid> players)
+	public void Init( string name, string color, IEnumerable<Guid> players )
 	{
-		Name = name;
-		Color = color;
-		_players = [.. players];
+		TeamData = new TeamData
+		{
+			Name = name,
+			Color = color
+		};
+		this.Players = [.. players];
 	}
 
 	public Team()
 	{
-		Name = "Unnamed";
-		Color = "Blue";
-		_players = [];
+		TeamData = new TeamData
+		{
+			Name = "Unnamed",
+			Color = "Blue"
+		};
 	}
 
 	public void AddPlayer( Guid playerId )
 	{
 		if ( !Players.Contains( playerId ) )
 		{
-			_players.Add( playerId );
+			Players.Add( playerId );
 		}
 	}
 
 	public void RemovePlayer( Guid playerId )
 	{
-		if ( Players.Contains( playerId ) )
-		{
-			_players.Remove( playerId );
-		}
+		Players.Remove( playerId );
 	}
 
 	public void FlushPlayers()
 	{
-		_players.Clear();
+		Players.Clear();
 	}
 
 	public bool IsThePlayerInTeam( Guid playerId )

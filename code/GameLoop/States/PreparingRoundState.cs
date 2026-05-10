@@ -6,12 +6,13 @@ namespace HideAndSeek.GameLoop.States
 	{
 		public override void Enter()
 		{
-			foreach ( var team in RoundStateMachine.GameLoop.Teams )
+			if ( Networking.IsHost )
 			{
-				team.FlushPlayers();
-			}
+				RoundStateMachine.GameLoop.Hiders.FlushPlayers();
+				RoundStateMachine.GameLoop.Seekers.FlushPlayers();
 
-			RoundStateMachine.GameLoop.AssignPlayers();
+				RoundStateMachine.GameLoop.AssignPlayers();
+			}
 			RoundStateMachine.GameLoop.Round.EndRound();
 			RoundStateMachine.GameLoop.Round.StartRound();
 		}
