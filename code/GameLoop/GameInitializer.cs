@@ -10,6 +10,7 @@ public class GameInitializer : GameObjectSystem
 {
 	#region Variables
 	private GameLoadingScreen _loadingScreen;
+	[Sync(SyncFlags.FromHost)] private MapInstance MapInstance { get; set; }
 	private readonly string _gameScenePath = "scenes/GameScene.scene";
 	private readonly string _mainMenuScenePath = "scenes/MainMenu.scene";
 	#endregion
@@ -38,38 +39,45 @@ public class GameInitializer : GameObjectSystem
 				return;
 			}
 
-			GameObject gameManager = Scene.CreateObject();
-			gameManager.Name = "GameLoop";
-			gameManager.GetOrAddComponent<GameManager>();
-			gameManager.NetworkMode = NetworkMode.Object;
-
-			Settings = new UserGameSettings();
-			Settings.LoadSettings();
-			MapIdent = Settings.MapName;
-
-			Package info = await Package.FetchAsync( Settings.MapName, true );
-			MapIdent = info?.TypeName == "map" ? info.FullIdent : "facepunch.flatgrass";
-			
 			_loadingScreen = Scene.GetAll<GameLoadingScreen>().FirstOrDefault();
-			_loadingScreen?.LoadingElement = MapIdent;
 
-			await Task.Delay( 5000 );
-
-			GameObject map = Scene.CreateObject();
-			map.Name = "Map";
-			MapInstance instance = map.AddComponent<MapInstance>();
-			instance.MapName = MapIdent;
-			instance.OnMapLoaded += async () =>
+			if ( Networking.IsHost )
 			{
-				Log.Info( "Map has been loaded!" );
-				bool loaded = await LevelLoader.TransitionToSceneAsync( _gameScenePath, true, Scene );
-				if ( !loaded )
+				Settings = new UserGameSettings();
+				Settings.LoadSettings();
+				MapIdent = Settings.MapName;
+
+				Package info = await Package.FetchAsync( Settings.MapName, true );
+				MapIdent = info?.TypeName == "map" ? info.FullIdent : "facepunch.flatgrass";
+
+				_loadingScreen?.LoadingElement = MapIdent;
+
+				await Task.Delay( 5000 );
+
+				GameObject map = Scene.CreateObject();
+				map.Name = "Map";
+				MapInstance = map.AddComponent<MapInstance>();
+				MapInstance.MapName = MapIdent;
+				MapInstance.OnMapLoaded += async () =>
 				{
-					Log.Error( $"Failed to load {_gameScenePath}." );
-					LevelLoader.ChangeScene( _mainMenuScenePath, false );
-				}
-				_loadingScreen?.GameObject?.Destroy();
-			};
+					Log.Info( "Map has been loaded!" );
+					GameObject gameManager = Scene.CreateObject();
+					gameManager.Name = "GameLoop";
+					gameManager.GetOrAddComponent<GameManager>();
+					gameManager.NetworkMode = NetworkMode.Object;
+					bool loaded = await LevelLoader.TransitionToSceneAsync( _gameScenePath, true, Scene );
+					_loadingScreen?.GameObject?.Destroy();
+					if ( !loaded )
+					{
+						Log.Error( $"Failed to load {_gameScenePath}." );
+						LevelLoader.ChangeScene( _mainMenuScenePath, false );
+					}
+				};
+			}
+			if ( Networking.IsClient )
+			{
+				_loadingScreen?.LoadingElement = MapInstance?.MapName;
+			}
 		}
 		catch ( Exception ex )
 		{
