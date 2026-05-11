@@ -2,12 +2,14 @@
 
 namespace HideAndSeek.GameLoop.Rules;
 
-public class Round
+public class Round : Component
 {
 	#region Properties
 	/// <summary>
 	/// Time since the start of the round.
 	/// </summary>
+	[Property]
+	[Sync( SyncFlags.FromHost )]
 	public TimeSince TimeSinceStart { get; private set; }
 
 	/// <summary>
@@ -18,6 +20,8 @@ public class Round
 	/// <summary>
 	/// Is round in progress?
 	/// </summary>
+	[Property]
+	[Sync( SyncFlags.FromHost )]
 	public bool IsStarted { get; private set; } = false;
 
 	/// <summary>
@@ -157,7 +161,7 @@ public class Round
 		TimeBeforeNextRound = DefaultTimeBeforeNextRound;
 	}
 
-	public Round( int roundLength, int roundsLimit, int timeBeforeNextRound, int prepTime) : this()
+	public void Init( int roundLength, int roundsLimit, int timeBeforeNextRound, int prepTime)
 	{
 		RoundLength = roundLength;
 		RoundLimit = roundsLimit;

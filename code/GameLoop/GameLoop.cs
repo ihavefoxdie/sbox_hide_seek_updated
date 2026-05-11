@@ -26,8 +26,9 @@ public sealed class GameLoop : Component, Component.INetworkListener
 		{
 			Hiders = GameObject.AddComponent<Team>();
 			Seekers = GameObject.AddComponent<Team>();
+			Round = GameObject.AddComponent<Round>();
 
-			Round = new Round( 1, 1, 1, 1 );
+			Round.Init( 1, 1, 1, 1 );
 			Seekers.Init( "Seekers", "Red" );
 			Hiders.Init( "Hiders", "Blue" );
 		}
