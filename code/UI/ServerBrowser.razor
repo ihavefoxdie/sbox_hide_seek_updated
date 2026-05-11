@@ -31,12 +31,12 @@
                 </div>
                 <div class="server_list_background">
                     <div class="server_list">
-                    @for (int i = 0; i < 25; i++)
+                    @for (int i = 0; i < Lobbies?.Count; i++)
                     {
                         <button class="hs_button">
-                            <div style="width: 14vw; overflow-x: hidden; text-overflow: ellipsis;">sadasdasdasdasdadasdsa</div>
-                            <div style="justify-content:center; width: 5vw; text-overflow: ellipsis;">25/30</div>
-                            <div style="justify-content:flex-end; width: 10vw; overflow-x: hidden; text-overflow: ellipsis;">asdaasdasdasdsadasdasdasdsdas</div>
+                                <div style="width: 14vw; overflow-x: hidden; text-overflow: ellipsis;">Lobbies[i]?.Name</div>
+                                <div style="justify-content:center; width: 5vw; text-overflow: ellipsis;">Lobbies[i]?.Members / Lobbies[i]?.MaxMembers</div>
+                                <div style="justify-content:flex-end; width: 10vw; overflow-x: hidden; text-overflow: ellipsis;">Lobbies[i]?.Map</div>
                         </button>
                     }
                     </div>
