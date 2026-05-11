@@ -1,6 +1,7 @@
 using HideAndSeek.GameLoop.Rules;
 using HideAndSeek.GameLoop.StateMachines;
 using System;
+using System.Threading.Tasks;
 
 namespace HideAndSeek.GameLoop;
 
@@ -8,6 +9,7 @@ public sealed class GameLoop : Component, Component.INetworkListener
 {
 	private UserGameSettings _gameSettings;
 	private RoundStateMachine _roundStateMachine;
+	private NetworkComponent _networkComponent;
 
 	[Sync( SyncFlags.FromHost )]
 	public Team Seekers { get; set; }
@@ -17,6 +19,10 @@ public sealed class GameLoop : Component, Component.INetworkListener
 	[Property]
 	[Sync( SyncFlags.FromHost )]
 	public Round Round { get; set; }
+
+	protected override async Task OnLoad()
+	{
+	}
 
 	protected override void OnAwake()
 	{
@@ -31,13 +37,20 @@ public sealed class GameLoop : Component, Component.INetworkListener
 			Round.Init( 1, 1, 1, 1 );
 			Seekers.Init( "Seekers", "Red" );
 			Hiders.Init( "Hiders", "Blue" );
+
+			_networkComponent = GameObject.GetOrAddComponent<NetworkComponent>();
+			_networkComponent.PlayerPrefab = GameObject.GetPrefab( "prefabs/player.prefab" );
 		}
-			
+
 		_roundStateMachine = GameObject.GetOrAddComponent<RoundStateMachine>();
 	}
 
-	protected override void OnEnabled()
+	protected override void OnStart()
 	{
+		if ( Networking.IsHost )
+		{
+			_networkComponent.StartLobby();
+		}
 	}
 
 	protected override void OnFixedUpdate()
@@ -55,6 +68,10 @@ public sealed class GameLoop : Component, Component.INetworkListener
 
 	public void OnActive( Connection connection )
 	{
+		if ( Round.IsStarted )
+		{
+			//Seekers.AddPlayer( connection.Id );
+		}
 	}
 
 	public void AssignPlayers()
@@ -74,7 +91,7 @@ public sealed class GameLoop : Component, Component.INetworkListener
 			var connection = Connection.All.ElementAt( index );
 
 			Seekers.AddPlayer( connection.Id );
-			//RespawnPlayer( connId );
+			RespawnPlayer( connection );
 		}
 
 		//assigning the remaining players to hiders team
@@ -82,9 +99,29 @@ public sealed class GameLoop : Component, Component.INetworkListener
 		{
 			if ( !Seekers.IsThePlayerInTeam( Connection.All[i].Id ) )
 			{
-				//RespawnPlayer( Connection.All[i].Id, "hiders" );
+				RespawnPlayer( Connection.All[i], "hiders" );
 				Hiders.AddPlayer( Connection.All[i].Id );
 			}
 		}
+	}
+
+
+	/// <summary>
+	/// Respawn player by providing them a new pawn to play as.
+	/// </summary>
+	/// <param name="connection">Player connection.</param>
+	/// <param name="tag">Player team.</param>
+	/// <returns>Pawn GameObject.</returns>
+	private void RespawnPlayer( Connection connection, string tag = "seekers" )
+	{
+		var startLocation = _networkComponent.FindSpawnLocation().WithScale( 1 );
+		// Spawn this object and make the client the owner
+		var player = _networkComponent.PlayerPrefab.Clone( startLocation, name: $"Player - {connection?.DisplayName}" );
+		player.Tags.Add( tag );
+ 
+		if ( tag == "seekers" )
+		{
+		}
+		player.NetworkSpawn( connection );
 	}
 }
