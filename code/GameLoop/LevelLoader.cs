@@ -1,4 +1,4 @@
-﻿using Sandbox.Utils.Interfaces;
+﻿using HideAndSeek.Utils.Interfaces;
 using System;
 using System.Threading.Tasks;
 

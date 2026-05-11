@@ -1,6 +1,5 @@
 ﻿using HideAndSeek.UI;
-using Sandbox.Utils.Interfaces;
-using System;
+using HideAndSeek.Utils.Interfaces;
 using System.Threading.Tasks;
 
 namespace HideAndSeek.GameLoop;
